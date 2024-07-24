@@ -1,0 +1,16 @@
+<mvc:View
+    controllerName="reqresproject.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <c:Fragment
+                fragmentName="reqresproject.view.fragments.MainPageTable"
+                type="XML"
+            />
+        </content>
+    </Page>
+</mvc:View>

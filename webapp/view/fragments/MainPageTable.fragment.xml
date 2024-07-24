@@ -1,0 +1,161 @@
+<c:FragmentDefinition xmlns:filterbar="sap.ui.comp.filterbar"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core">
+
+    <filterbar:FilterBar id="fbMainPageTable"
+        showClearOnFB="true"
+        clear="onPressClearSearchMainPageTable"
+        search="onPressSearchMainPageTable">
+        <filterbar:filterGroupItems>
+            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+                name="PWNummer"
+                label="{i18n>text.pwnummer}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <Input submit=""></Input>
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+
+            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+                name="Status"
+                label="{i18n>text.status}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <ComboBox 
+                        items="{path: 'statusModel>/StatusList'}">
+                        <c:Item
+                            key="{statusModel>key}"
+                            text="{statusModel>text}"
+                        />
+                    </ComboBox>
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+            
+            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+                name="Planungsnummer"
+                label="{i18n>text.planungsnummer}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <Input submit=""></Input>
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+
+            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+                name="Verwendungszweck"
+                label="{i18n>text.verwendungszweck}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <Input submit=""></Input>
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+
+            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+                name="Projektnummer"
+                label="{i18n>text.projektnummer}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <Input submit=""></Input>
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+
+            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+                name="Ersteller"
+                label="{i18n>text.ersteller}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <Input submit=""></Input>
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+
+            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+                name="Verwender"
+                label="{i18n>text.verwender}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <Input submit=""></Input>
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+
+            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+                name="Erstelldatum"
+                label="{i18n>text.erstelldatum}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <DatePicker />
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+
+        </filterbar:filterGroupItems>
+    </filterbar:FilterBar>
+
+    <Toolbar class="sapUiTinyMargin">
+        <Button
+            icon="sap-icon://add"
+            type="Ghost"
+            press="onPressAddNewSachnummerToTableStep11"
+        />
+        <ToolbarSpacer />
+        <Select change="onSelectChangeItemCardinalityMainPageTable">
+            <c:Item key="20" text="20" />
+            <c:Item key="50" text="50" />
+            <c:Item key="100" text="100" />
+        </Select>
+        <Button
+            icon="sap-icon://action-settings"
+            type="Transparent"
+            press="onPressOptionsMainPageTable"
+            tooltip="Options"
+        />
+    </Toolbar>
+
+    <ScrollContainer id="scMainPageTable"
+        vertical="true"
+        focusable="true">
+        <Table items="{applicationModel>/MainPageTableDataList}"
+            mode="SingleSelectMaster"
+            itemPress="onPressSelectMainPageTable">
+            <columns>
+                <Column >
+                    <Label text="{i18n>text.pwnummer}"/>
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.status}" />
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.planungsnummer}"/>
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.verwendungszweck}"/>
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.projektnummer}"/>
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.ersteller}"/>
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.verwender}"/>
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.erstelldatum}"/>
+                </Column>
+
+            </columns>
+            <items>
+                <ColumnListItem id="cliMainPageTable"
+                    type="Active">
+                    <cells >
+                        <Text text="{applicationModel>PW_NR}"></Text>
+                        <Text text="{applicationModel>STAT}"></Text>
+                        <Text text="{applicationModel>BT_NR}"></Text>
+                        <Text text="{applicationModel>VRWNG_AUSL}"></Text>
+                        <Text text="{applicationModel>Derivate_ConstructionSet_Project}"></Text>
+                        <Text text="{applicationModel>Creator}"></Text>
+                        <Text text="{applicationModel>User_LastName} {applicationModel>User_FirstName}"></Text>
+                        <Text text="{path: 'applicationModel>CREATED_ON', formatter: '.formatter.formatDate'}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </ScrollContainer>
+</c:FragmentDefinition>
