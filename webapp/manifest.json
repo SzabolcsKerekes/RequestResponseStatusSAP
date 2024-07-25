@@ -81,19 +81,27 @@
       "routes": [
         {
           "name": "RouteView1",
-          "pattern": ":?query:",
-          "target": [
-            "TargetView1"
-          ]
+          "pattern": "",
+          "target": ["TargetView1"]
+        },
+        {
+          "name": "RoutePwDetails",
+          "pattern": "DetailView/OID_KOP={OID_KOP}&ANR_KOP={ANR_KOP}&PW_NR={PW_NR}",
+          "target": ["TargetDetail"]
         }
       ],
       "targets": {
         "TargetView1": {
           "viewType": "XML",
+          "viewName": "View1",
           "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "View1",
-          "viewName": "View1"
+          "clearControlAggregation": false
+        },
+        "TargetDetail": {
+          "viewType": "XML",
+          "viewName": "DetailView",
+          "transition": "slide",
+          "clearControlAggregation": false
         }
       }
     },

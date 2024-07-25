@@ -42,7 +42,7 @@ sap.ui.define([
                 // Ensure the model is fully loaded before accessing the data
                 oModel.attachRequestCompleted(function () {
                     // Access the PwList property
-                    var aPwListSet = oModel.getProperty("/PwList");
+                    var aPwListSet = oModel.getProperty("/HeaderSet");
                     // Setting up table
                     oModel.setProperty("/MainPageTableDataList", aPwListSet);
                 });
@@ -57,9 +57,37 @@ sap.ui.define([
                 // Implement your logic here
             },
 
-            onPressOptionsMainPageTable: function () {
-                // Handle the options button press
-                // Implement your logic here
+            // onPressOptionsMainPageTable: function () {
+            //     // Handle the options button press
+            //     // Implement your logic here
+            // },
+
+            /* ======================================================================================================================================
+                Navigation to Details Page
+            ====================================================================================================================================== */
+            onPressSelectMainPageTableNavToPwDetails: function (oEvent) {
+                var oSelectedItem = oEvent.getParameter("listItem") || oEvent.getSource();
+
+                var oContext = oSelectedItem.getBindingContext("applicationModel");
+                var sPwNr = oContext.getProperty("PW_NR");
+                var sOidKop = oContext.getProperty("OID_KOP");
+                var sAnrKop = oContext.getProperty("ANR_KOP");
+
+                // var aPwListSet = this.getView().getModel("applicationModel").getProperty("/HeaderSet");
+
+                // Find the object with the matching PPNumber
+                // var oMatchingObject = aPwListSet.find(function (oItem) {
+                //     return oItem.PW_NR === sPwNr;
+                // });
+
+                // this.getView().getModel("applicationModel").setProperty("/selectedItemFromMainTable", oMatchingObject);
+            
+                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("RoutePwDetails", {
+                    PW_NR: sPwNr,
+                    ANR_KOP: sAnrKop,
+                    OID_KOP: sOidKop
+                });
             }
         });
     });

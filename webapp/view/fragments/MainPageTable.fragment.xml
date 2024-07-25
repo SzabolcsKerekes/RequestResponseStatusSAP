@@ -113,7 +113,7 @@
         focusable="true">
         <Table items="{applicationModel>/MainPageTableDataList}"
             mode="SingleSelectMaster"
-            itemPress="onPressSelectMainPageTable">
+            itemPress="onPressSelectMainPageTableNavToPwDetails">
             <columns>
                 <Column >
                     <Label text="{i18n>text.pwnummer}"/>
