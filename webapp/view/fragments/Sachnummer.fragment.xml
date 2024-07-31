@@ -1,0 +1,171 @@
+<c:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <VBox>
+        <Toolbar>
+            <Button
+                icon="sap-icon://add"
+                type="Ghost"
+                press="onPressAddNewSachnummerToTableStep11"
+            />
+        </Toolbar>
+        <ScrollContainer id="scSachnummerStep11"
+            vertical="true"
+            focusable="true">
+            <Table 
+                id="tSachnummerTable"
+                items="{applicationModel>/Step11AddedRows}"
+            >
+                <columns>
+                    <Column>
+                        <Label 
+                            text="{i18n>lbl.part_number}"
+                            required="true"
+                        />
+                    </Column>
+                    <Column>
+                        <Label text="{i18n>lbl.ai_valid}" />
+                    </Column>
+                    <Column>
+                        <Label 
+                            text="{i18n>lbl.ai_deviant}"
+                            required="true"
+                        />
+                    </Column>
+                    <Column>
+                        <Label text="{i18n>lbl.ko_gruppe}" />
+                    </Column>
+                    <Column>
+                        <Label text="{i18n>lbl.module}"
+                            required="true"
+                        />
+                    </Column>
+                    <Column>
+                        <Label text="{i18n>lbl.module_org}"
+                            required="true"
+                        />
+                    </Column>
+                    <Column>
+                        <Label text="{i18n>lbl.identnummer}" />
+                    </Column>
+                    <Column>
+                        <Label text="{i18n>lbl.comm}" />
+                    </Column>
+                    <Column>
+                        <Label text="{i18n>lbl.stuck_auslosung}"
+                            required="true"
+                        />
+                    </Column>
+                    <Column width="5%">
+                        <Label text="{i18n>lbl.loschen}" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem id="cliSachnummerStep11">
+                        <cells >
+                            <VBox>
+                                <HBox>
+                                    <Input value="{applicationModel>PartNr}"
+                                        change="onChangeGetPartNrDataStep11"
+                                        id="input1Step11PartNr"
+                                        valueState="{applicationModel>PartNrValueState}"
+                                        valueStateText="{applicationModel>PartNrValueStateText}"
+                                    />
+                                    <Button press="onPressGetPartNrDataStep11"
+                                        id="btnRefreshStep11"
+                                        icon="sap-icon://refresh"
+                                    />
+                                </HBox>
+                                <Input id="input2Step11Description"
+                                    value="{applicationModel>Description}"
+                                    editable="false"
+                                    tooltip="{applicationModel>Description}"/>
+                            </VBox>
+                            
+                            <Input id="input3Step11ValidAI"
+                                value="{applicationModel>Valid_AI}"
+                                editable="false"/>
+                            
+                            <Input id="input4Step11DeviantAI"
+                                value="{applicationModel>Deviant_AI}"
+                                editable="{applicationModel>bEnabledInputFields}"
+                                valueState="{applicationModel>Deviant_AIValueState}"
+                                valueStateText="{applicationModel>Deviant_AIValueStateText}"
+                                liveChange="onLiveChangeDeviantInputStep11"
+                                change="onChangeDeviantAiInputStep11"
+                                maxLength="2"/>  
+
+                            <Input value="{applicationModel>Kogroup}"
+                                valueState="{applicationModel>KogroupValueState}"
+                                valueStateText="{applicationModel>KogroupValueStateText}"
+                                editable="{applicationModel>bEnabledInputFields}" 
+                                id="input5KoGroupStep11"
+                                maxLength="5"
+                                liveChange="onChangeKogroupInputStep11"/>
+
+                            <Input 
+                                id="input6ModulStep11"
+                                value="{applicationModel>Modul}"
+                                valueState="{applicationModel>ModulValueState}"
+                                valueStateText="{applicationModel>ModulValueStateText}"
+                                liveChange="onLiveChangeResetValueStateFieldsStep11"
+                                editable="{applicationModel>bEnabledInputFields}"
+                            />
+                            <ComboBox 
+                                id="comboBoxModulOrgStep11"
+                                value="{applicationModel>ModulOrg}"
+                                valueState="{applicationModel>ModulOrgValueState}"
+                                valueStateText="{applicationModel>ModulOrgValueStateText}"
+                                editable="{applicationModel>bEnabledInputFields}"
+                                change="onLiveChangeResetValueStateFieldsStep11"
+                            />
+                            <Input value="" 
+                                id="input8IdentNrStep11"
+                                editable="{applicationModel>bEnabledInputFields}"
+                            />
+                            <Input value="" 
+                                id="input9CommentStep11"
+                                editable="{applicationModel>bEnabledInputFields}"
+                            />
+                            <Input value="{applicationModel>Stuck_Auslosung}"
+                                id="input10StuckStep11"
+                                editable="{applicationModel>bEnabledInputFields}"
+                                valueState="{applicationModel>Stuck_AuslosungValueState}"
+                                valueStateText="{applicationModel>Stuck_AuslosungValueStateText}"
+                                liveChange="onLiveChangeResetValueStateFieldsStep11"
+                            />
+                            <Button
+                                press="onPressDeleteSelectedRowSachnummerStep11"
+                                icon="sap-icon://delete"
+                                type="Reject"
+                            />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </ScrollContainer>
+
+        <FlexBox>
+            <Button
+                id="btnSaveStep11"
+                press="onPressSaveOptionsStep11"
+                text="{i18n>btn.speichern}"
+                enabled="false"
+                icon="sap-icon://save"
+                class="sapUiTinyMargin"
+            >
+            </Button>
+            <Button
+                id="btnApprovalStep11"
+                text="{i18n>btn.genehmigung}"
+                enabled="false"
+                icon="sap-icon://employee-approvals"
+                class="sapUiTinyMargin"
+                press="onPressValidateStep11"
+            >
+            </Button>
+        </FlexBox>
+    </VBox>
+</c:FragmentDefinition>

@@ -1,0 +1,105 @@
+<c:FragmentDefinition xmlns:filterbar="sap.ui.comp.filterbar"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core">
+
+    <filterbar:FilterBar id="fbBenutzersucheSearch"
+        showClearOnFB="true"
+        clear="onPressClearSearchBenutzersucheStep7"
+        search="onPressSearchBenutzersucheStep7">
+        <filterbar:filterGroupItems>
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
+                name="QX"
+                label="{i18n>text.qx}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <Input submit=""></Input>
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
+                name="Lastname"
+                label="{i18n>text.lastname}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <Input submit=""></Input>
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
+                name="Firstname"
+                label="{i18n>text.firstname}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <Input submit=""></Input>
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
+                name="Department"
+                label="{i18n>text.fachbereich}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <Input submit=""></Input>
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
+                name="Email"
+                label="{i18n>text.email}"
+                visibleInFilterBar="true">
+                <filterbar:control>
+                    <Input submit=""></Input>
+                </filterbar:control>
+            </filterbar:FilterGroupItem>
+
+        </filterbar:filterGroupItems>
+    </filterbar:FilterBar>
+
+    <ScrollContainer id="scBenutzersucheStep7"
+        vertical="true"
+        focusable="true">
+        <Table 
+            id="tBenutzerSucheTable"
+            items="{applicationModel>/Step7BenutzersucheList}"
+            mode="SingleSelectMaster"
+            itemPress="onPressSelectBenutzersucheStep7">
+            <columns>
+                <Column >
+                    <Label text="{i18n>text.pwnummer}"/>
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.status}" />
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.planungsnummer}"/>
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.verwendungszweck}"/>
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.projektnummer}"/>
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.ersteller}"/>
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.verwender}"/>
+                </Column>
+                <Column >
+                    <Label text="{i18n>text.erstelldatum}"/>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem id="cliBenutzersucheStep7"
+                    type="Active">
+                    <cells >
+                        <Text text="{applicationModel>PW_NR}"></Text>
+                        <Text text="{applicationModel>STAT}"></Text>
+                        <Text text="{applicationModel>BT_NR}"></Text>
+                        <Text text="{applicationModel>VRWNG_AUSL}"></Text>
+                        <Text text="{applicationModel>Derivate_ConstructionSet_Project}"></Text>
+                        <Text text="{applicationModel>Creator}"></Text>
+                        <Text text="{applicationModel>User_LastName} {applicationModel>User_FirstName}"></Text>
+                        <Text text="{path: 'applicationModel>CREATED_ON', formatter: '.formatter.formatDate'}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </ScrollContainer>
+</c:FragmentDefinition>

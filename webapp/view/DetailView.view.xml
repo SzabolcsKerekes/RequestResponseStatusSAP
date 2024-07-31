@@ -3,7 +3,10 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:uxap="sap.uxap"
     xmlns="sap.m"
-    displayBlock="true">
+    displayBlock="true"
+    xmlns:c="sap.ui.core"
+    xmlns:commons="sap.suite.ui.commons"
+>
     <Page 
         id="detailPage"
         showNavButton="true"
@@ -15,57 +18,41 @@
                 <FlexBox direction="Column">
                     <Text id="textPwTitle" text="{i18n>text.auslosenummer}: {applicationModel>/Header/PW_NR}"/>
                     <Text id="textCreationDate" text="{i18n>text.erstelldatum}: {path: 'applicationModel>/Header/CREATED_ON', formatter: '.formatter.formatDate'}"/>
-                    <!-- <commons:MicroProcessFlow id="statusContainerMaster">
+                    <commons:MicroProcessFlow id="statusContainerMaster">
                         <commons:content>
                             <commons:MicroProcessFlowItem icon="sap-icon://edit"
-                                state="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: 'mypws.utils.formatter.formatStateBullet1'}"
+                                state="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: '.formatter.formatStateBullet1'}"
                                 title="In Arbeit">
                             </commons:MicroProcessFlowItem>
                             <commons:MicroProcessFlowItem icon="sap-icon://inspection"
-                                state="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: 'mypws.utils.formatter.formatStateBullet2'}"
+                                state="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: '.formatter.formatStateBullet2'}"
                                 title="Zur Genehmigung">
                             </commons:MicroProcessFlowItem>
                             <commons:MicroProcessFlowItem icon="sap-icon://lead"
                                 visible="{applicationModel>/isGaekoAvailable}"
-                                state="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: 'mypws.utils.formatter.formatStateBullet3'}"
-                                title="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: 'mypws.utils.formatter.formatTitleBullet3'}">
+                                state="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: '.formatter.formatStateBullet3'}"
+                                title="Bezahlt">
                             </commons:MicroProcessFlowItem>
                             <commons:MicroProcessFlowItem icon="sap-icon://accept"
-                                state="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: 'mypws.utils.formatter.formatStateBullet4'}"
+                                state="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: '.formatter.formatStateBullet4'}"
                                 title="Genehmigt">
                             </commons:MicroProcessFlowItem>
-                            <commons:MicroProcessFlowItem icon="sap-icon://cancel"
-                                state="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: 'mypws.utils.formatter.formatStateBullet5'}"
-                                title="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: 'mypws.utils.formatter.formatTitleBullet5'}">
-                            </commons:MicroProcessFlowItem>
-                            <commons:MicroProcessFlowItem icon="sap-icon://cancel"
-                                state="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: 'mypws.utils.formatter.formatStateBullet6'}"
-                                title="Verarbeitungsfehler">
-                            </commons:MicroProcessFlowItem>
-                            <commons:MicroProcessFlowItem icon="sap-icon://accept"
-                                state="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: 'mypws.utils.formatter.formatStateBullet7'}"
-                                title="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: 'mypws.utils.formatter.formatTitleBullet7'}">
-                            </commons:MicroProcessFlowItem>
-                            <commons:MicroProcessFlowItem icon="sap-icon://task"
-                                state="{parts:[{path: 'applicationModel>/Header/STAT'},{path: 'applicationModel>/Header/GAEKO_Status'}], formatter: 'mypws.utils.formatter.formatStateBullet8'}"
-                                title="Abgeschlossen">
-                            </commons:MicroProcessFlowItem>
                         </commons:content>
-                    </commons:MicroProcessFlow> -->
+                    </commons:MicroProcessFlow>
                 </FlexBox>
             </uxap:headerContent>
             <uxap:sections>
-                <uxap:ObjectPageSection title="Tab 1">
+                <uxap:ObjectPageSection title="{i18n>text.tab_allgemeine}">
                     <uxap:ObjectPageSubSection>
                         <Panel expandable="true"
                             expanded="true">
                             <headerToolbar>
                                 <OverflowToolbar height="3rem">
-                                    <Title text="bla bla"
+                                    <Title text="{i18n>text.projektbedarf}"
                                         id="titleHeaderDetails"/>
                                     <ToolbarSpacer />
                                     <Button id="editDataBtn"
-                                        visible="true"
+                                        visible="false"
                                         enabled="{applicationModel>/bEnabledChangeHeader}"
                                         icon="sap-icon://edit"
                                         press="onPressEditPwHeader"
@@ -85,23 +72,27 @@
                                     </Button>
                                 </OverflowToolbar>
                             </headerToolbar>
-                            <!-- <content>
-                                <c:Fragment fragmentName="mypws.view.fragments.GeneralDataReadOnly"
-                                    type="XML" />
-                                <c:Fragment fragmentName="mypws.view.fragments.GeneralDataEdit"
-                                    type="XML" />
-                            </content> -->
+                            <content>
+                                <c:Fragment
+                                    fragmentName="reqresproject.view.fragments.GeneralDataReadOnly"
+                                    type="XML"
+                                />
+                                <c:Fragment
+                                    fragmentName="reqresproject.view.fragments.GeneralDataEdit"
+                                    type="XML"
+                                />
+                            </content>
                         </Panel>
                     </uxap:ObjectPageSubSection>
                 </uxap:ObjectPageSection>
 
-                <uxap:ObjectPageSection title="Tab 2">
+                <uxap:ObjectPageSection title="{i18n>text.tab_positionen}">
                     <uxap:ObjectPageSubSection>
                         <Panel expandable="true"
                             expanded="true">
                             <headerToolbar>
                                 <OverflowToolbar height="3rem">
-                                    <Title text="bla bla 2"
+                                    <Title text="Teile hinzufügen"
                                         id="titleHeaderDetails2"/>
                                     <ToolbarSpacer />
                                     <Button id="editDataBtn2"
@@ -125,12 +116,9 @@
                                     </Button>
                                 </OverflowToolbar>
                             </headerToolbar>
-                            <!-- <content>
-                                <c:Fragment fragmentName="mypws.view.fragments.GeneralDataReadOnly"
-                                    type="XML" />
-                                <c:Fragment fragmentName="mypws.view.fragments.GeneralDataEdit"
-                                    type="XML" />
-                            </content> -->
+                            <c:Fragment fragmentName="reqresproject.view.fragments.Sachnummer"
+                                type="XML" 
+                            />
                         </Panel>
                     </uxap:ObjectPageSubSection>
                 </uxap:ObjectPageSection>

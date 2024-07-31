@@ -1,0 +1,142 @@
+<c:FragmentDefinition xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+>
+
+    <form:SimpleForm
+        editable="false"
+        id="formGeneralDataReadOnly"
+        columnsXL="3" columnsL="3" columnsM="3" emptySpanXL="0"
+        layout="ResponsiveGridLayout"
+        visible="{applicationModel>/bRestartVisibilityGeneralDataReadOnly}"
+    >
+
+        <!-- General -->
+        <c:Title text="Allgemeine Daten" />
+
+        <Label text="{i18n>lbl.verwendungszweck}"/>
+        <Text text="{applicationModel>/Header/VRWNG_AUSL}" id="textVerwendungszweckGeneralDataReadOnly"></Text>
+
+        <Label text="{i18n>txt.standort_anlieferung}"/>
+        <Text text="{applicationModel>/Header/PROD_KATE}" id="textStandortAnlieferungGeneralDataReadOnly"></Text>
+
+        <Label text="{i18n>lbl.derivate_baukasten_project}"/>
+        <Text text="{applicationModel>/Header/Derivate_ConstructionSet_Project}" id="textDerivateGeneralDataReadOnly"></Text>
+
+        <Label text="{i18n>lbl.build_phase}"/>
+        <Text text="{applicationModel>/Header/BAUPHASE}" id="textBuildPhaseGeneralDataReadOnly"></Text>
+
+        <Label text="{i18n>lbl5.wizard1.step12}"/>
+        <Text text="{applicationModel>/Header/KOSTL}" id="textKostenstelleGeneralDataReadOnly"></Text>
+
+        <Label text="{i18n>lbl.at_art}"/>
+        <Text text="{applicationModel>/Header/AtArt}" id="textAbsicherungGeneralDataReadOnly"></Text>
+
+        <Label text="{i18n>lbl.verwendervermerk}"/>
+        <Text text="{applicationModel>/Header/ERGSTORT}" id="textDescriptionGeneralDataReadOnly"></Text>
+
+        <c:Title text="" />
+
+        <!-- Delivery & date -->
+        <Label text="{i18n>lbl8.wizard1.step12}"/>
+        <Text text="{path: 'applicationModel>/Header/Delivery_type', formatter: '.formatDeliveryTypeText'}" id="textDateSelectionGeneralDataReadOnly"></Text>
+        <Label text="{i18n>lbl.b-termin}"/>
+        <Text text="{path: 'applicationModel>/Header/CREATED_ON', formatter: '.formatter.formatDate'}" id="textUpdateDateGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.gaekoid}"/>
+        <Text text="{applicationModel>/Header/Gaeko_ID}" id="textGaekoIDGeneralDataReadOnly"></Text>
+
+        <c:Title text="" />
+
+        <!-- Ersteller / Creator-->
+        <c:Title text="{i18n>text.ersteller}" />
+
+        <Label text="{i18n>text.qx}"/>
+        <Text text="{applicationModel>/Header/Creator_QX}" id="textQxErstellerGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.lastname}"></Label>
+        <Text text="{applicationModel>/Header/Creator_LastName}" id="textLastnameErstellerGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.firstname}"></Label>
+        <Text text="{applicationModel>/Header/Creator_FirstName}" id="textFirstnameErstellerGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.fachbereich}"></Label>
+        <Text text="{applicationModel>/Header/Creator_Department}" id="textFachbereichErstellerGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.email}"></Label>
+        <Text text="{applicationModel>/Header/Creator_EmailAddress}" id="textEmailErstellerGeneralDataReadOnly"></Text>
+
+
+        <!-- Verwender / User -->
+        <c:Title text="{i18n>text.verwender}"/>
+
+        <Label text="{i18n>text.qx}" />
+        <Text text="{applicationModel>/Header/User_QX}" id="textQxVerwenderGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.lastname}"></Label>
+        <Text text="{applicationModel>/Header/User_LastName}" id="textLastnameVerwenderGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.firstname}"></Label>
+        <Text text="{applicationModel>/Header/User_FirstName}" id="textFirstnameVerwenderGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.fachbereich}"></Label>
+        <Text text="{applicationModel>/Header/User_Department}" id="textFachbereichVerwenderGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.email}"></Label>
+        <Text text="{applicationModel>/Header/User_EmailAddress}" id="textEmailVerwenderGeneralDataReadOnly"></Text>
+
+        <!-- Beteiligten / Additional recipient -->
+
+        <c:Title text="{i18n>text.abgestimmt}"/>
+
+        <Label text="{i18n>text.qx}"/>
+        <Text text="{applicationModel>/Header/Additional_recipient_QX}" id="textQxBeteiligtenGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.lastname}"></Label>
+        <Text text="{applicationModel>/Header/Additional_recipient_LastName}" id="textLastnameBeteiligtenGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.firstname}"></Label>
+        <Text text="{applicationModel>/Header/Additional_recipient_FirstName}" id="textFirstnameBeteiligtenGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.fachbereich}"></Label>
+        <Text text="{applicationModel>/Header/Additional_recipient_Department}" id="textFachbereichBeteiligtenGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.email}"></Label>
+        <Text text="{applicationModel>/Header/Additional_recipient_EmailAddress}" id="textEmailBeteiligtenGeneralDataReadOnly"></Text>
+
+        <!-- Receiver Intern / Mitarbeiter-->
+        <c:Title text="{i18n>text1Form.wizard1.step9}"/>
+        <Label text="{i18n>text.qx}" required="{applicationModel>/bSelectedRadioButtonMitarbeiter}" />
+        <Text text="{applicationModel>/Header/Internal_receiver_QX}" id="textQxInternDeliveryGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.lastname}"/>
+        <Text text="{applicationModel>/Header/Internal_receiver_LastName}" id="textLastnameInternDeliveryGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.firstname}"/>
+        <Text text="{applicationModel>/Header/Internal_receiver_FirstName}" id="textFirstnameInternDeliveryGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.fachbereich}"/>
+        <Text text="{applicationModel>/Header/Internal_receiver_Department}" id="textFachbereichInternDeliveryGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.email}"/>
+        <Text text="{applicationModel>/Header/Internal_receiver_EmailAddress}" id="textEmailInternDeliveryGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.phone}" id="lblInternalPhoneGeneralDataReadOnly" />
+        <Text text="{applicationModel>/Header/Internal_receiver_Phone}" id="textPhoneInternDeliveryGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.bauort}" id="lblInternalBauortGeneralDataReadOnly"/>
+        <Text text="{applicationModel>/Header/Internal_receiver_ConstructionSite}" id="textBauortGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.standort}" id="lblInternalStandortGeneralDataReadOnly"/>
+        <Text text="{applicationModel>/Header/Internal_receiver_LocationPart}" id="textLocationPartGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.building}" id="lblInternalBuildingGeneralDataReadOnly"/>
+        <Text text="{applicationModel>/Header/Internal_receiver_Building}" id="textBuildingGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.room_number}" id="lblInternalRoomGeneralDataReadOnly"/>
+        <Text text="{applicationModel>/Header/Internal_receiver_RoomNumber}" id="textRoomNumberGeneralDataReadOnly"></Text>
+        <Label text="{i18n>text.debitorennummer}"/>
+        <Text text="{applicationModel>/Header/Internal_receiver_Sup_Cust_nr}" id="textDebitorenGeneralDataReadOnly"></Text>
+
+        <!-- Receiver Extern -->
+        <c:Title text="{i18n>text2Form.wizard1.step9}"/>
+
+        <Label text="{i18n>text.supplier}" required="{applicationModel>/bSelectedRadioButtonExterneAdresse}" id="lblExternSupplierGeneralDataReadOnly"/>
+        <Text text="{applicationModel>/Header/External_receiver_ID}" id="textExternSupCustNrGeneralDataReadOnly"></Text>
+
+        <Label text="{i18n>text.company}" id="lblExternDepartmentGeneralDataReadOnly"/>
+        <Text text="{applicationModel>/Header/External_receiver_Name}" id="textExternDepartmentGeneralDataReadOnly"></Text>
+
+        <Label text="{i18n>text.street}" id="lblExternStreetGeneralDataReadOnly"/>
+        <Text text="{applicationModel>/Header/External_receiver_Address}" id="textExternStreetGeneralDataReadOnly"></Text>
+
+        <Label text="{i18n>text.country}" id="lblExternCountryGeneralDataReadOnly"/>
+        <Text text="{applicationModel>/Header/External_receiver_Place}" id="textExternCountryGeneralDataReadOnly"></Text>
+
+        <Label text="{i18n>text.contact}" id="lblExternContactGeneralDataReadOnly"/>
+        <Text text="{applicationModel>/Header/External_receiver_Contact_Person}" id="textExternContactGeneralDataReadOnly"></Text>
+
+        <Label text="{i18n>text.phone}" id="lblExternPhoneGeneralDataReadOnly"/>
+        <Text text="{applicationModel>/Header/External_receiver_Phone}" id="textExternPhoneGeneralDataReadOnly"></Text>
+
+    </form:SimpleForm>
+
+</c:FragmentDefinition>

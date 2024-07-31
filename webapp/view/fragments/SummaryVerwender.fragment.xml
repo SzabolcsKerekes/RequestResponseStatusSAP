@@ -1,0 +1,98 @@
+<c:FragmentDefinition xmlns:filterbar="sap.ui.comp.filterbar"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core">
+    <Dialog id="tableDialogVerwender" title="Verwender Dialog">
+        <content>
+            <filterbar:FilterBar id="fbSummaryVerwenderSearch"
+                showClearOnFB="true"
+                clear="onPressClearSearchVerwenderSummary"
+                search="onPressSearchVerwenderSummary">
+                <filterbar:filterGroupItems>
+                    <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
+                        name="QX"
+                        label="{i18n>text.qx}"
+                        visibleInFilterBar="true">
+                        <filterbar:control>
+                            <Input submit=""></Input>
+                        </filterbar:control>
+                    </filterbar:FilterGroupItem>
+                    <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
+                        name="Lastname"
+                        label="{i18n>text.lastname}"
+                        visibleInFilterBar="true">
+                        <filterbar:control>
+                            <Input submit=""></Input>
+                        </filterbar:control>
+                    </filterbar:FilterGroupItem>
+                    <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
+                        name="Firstname"
+                        label="{i18n>text.firstname}"
+                        visibleInFilterBar="true">
+                        <filterbar:control>
+                            <Input submit=""></Input>
+                        </filterbar:control>
+                    </filterbar:FilterGroupItem>
+                    <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
+                        name="Department"
+                        label="{i18n>text.fachbereich}"
+                        visibleInFilterBar="true">
+                        <filterbar:control>
+                            <Input submit=""></Input>
+                        </filterbar:control>
+                    </filterbar:FilterGroupItem>
+                    <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
+                        name="Email"
+                        label="{i18n>text.email}"
+                        visibleInFilterBar="true">
+                        <filterbar:control>
+                            <Input submit=""></Input>
+                        </filterbar:control>
+                    </filterbar:FilterGroupItem>
+
+                </filterbar:filterGroupItems>
+            </filterbar:FilterBar>
+
+            <ScrollContainer id="scSummaryVerwenderStep10"
+                vertical="true"
+                focusable="true">
+                <Table items="{applicationModel>/VerwenderListGeneralDataDialog}"
+                    mode="SingleSelectMaster"
+                    itemPress="onPressSelectVerwenderSummary">
+                    <columns>
+                        <Column >
+                            <Label text="{i18n>text.qx}"/>
+                        </Column>
+                        <Column >
+                            <Label text="{i18n>text.lastname}" />
+                        </Column>
+                        <Column >
+                            <Label text="{i18n>text.firstname}"/>
+                        </Column>
+                        <Column >
+                            <Label text="{i18n>text.fachbereich}"/>
+                        </Column>
+                        <Column >
+                            <Label text="{i18n>text.email}"/>
+                        </Column>
+
+                    </columns>
+                    <items>
+                        <ColumnListItem id="cliSummaryVerwenderStep10"
+                            type="Active">
+                            <cells >
+                                <Text text="{applicationModel>QX}"></Text>
+                                <Text text="{applicationModel>Lastname}"></Text>
+                                <Text text="{applicationModel>Firstname}"></Text>
+                                <Text text="{applicationModel>Department}"></Text>
+                                <Text text="{applicationModel>Email}"></Text>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </ScrollContainer>
+        </content>
+    <beginButton>
+        <Button text="Close" press="onCloseSummaryVerwenderDialog" />
+    </beginButton>
+    </Dialog>
+</c:FragmentDefinition>

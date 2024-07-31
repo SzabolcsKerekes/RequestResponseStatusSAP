@@ -1,13 +1,15 @@
 <c:FragmentDefinition xmlns:filterbar="sap.ui.comp.filterbar"
     xmlns="sap.m"
-    xmlns:c="sap.ui.core">
+    xmlns:c="sap.ui.core"
+    xmlns:commons="sap.suite.ui.commons"
+>
 
     <filterbar:FilterBar id="fbMainPageTable"
         showClearOnFB="true"
         clear="onPressClearSearchMainPageTable"
         search="onPressSearchMainPageTable">
         <filterbar:filterGroupItems>
-            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
                 name="PWNummer"
                 label="{i18n>text.pwnummer}"
                 visibleInFilterBar="true">
@@ -16,7 +18,7 @@
                 </filterbar:control>
             </filterbar:FilterGroupItem>
 
-            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
                 name="Status"
                 label="{i18n>text.status}"
                 visibleInFilterBar="true">
@@ -28,10 +30,11 @@
                             text="{statusModel>text}"
                         />
                     </ComboBox>
+                    <!-- <Input submit=""></Input> -->
                 </filterbar:control>
             </filterbar:FilterGroupItem>
             
-            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
                 name="Planungsnummer"
                 label="{i18n>text.planungsnummer}"
                 visibleInFilterBar="true">
@@ -40,7 +43,7 @@
                 </filterbar:control>
             </filterbar:FilterGroupItem>
 
-            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
                 name="Verwendungszweck"
                 label="{i18n>text.verwendungszweck}"
                 visibleInFilterBar="true">
@@ -49,7 +52,7 @@
                 </filterbar:control>
             </filterbar:FilterGroupItem>
 
-            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
                 name="Projektnummer"
                 label="{i18n>text.projektnummer}"
                 visibleInFilterBar="true">
@@ -58,7 +61,7 @@
                 </filterbar:control>
             </filterbar:FilterGroupItem>
 
-            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
                 name="Ersteller"
                 label="{i18n>text.ersteller}"
                 visibleInFilterBar="true">
@@ -67,7 +70,7 @@
                 </filterbar:control>
             </filterbar:FilterGroupItem>
 
-            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
                 name="Verwender"
                 label="{i18n>text.verwender}"
                 visibleInFilterBar="true">
@@ -76,12 +79,13 @@
                 </filterbar:control>
             </filterbar:FilterGroupItem>
 
-            <filterbar:FilterGroupItem groupName="MainPageSearchBar"
+            <filterbar:FilterGroupItem groupName="VerwenderSearchBar"
                 name="Erstelldatum"
                 label="{i18n>text.erstelldatum}"
                 visibleInFilterBar="true">
                 <filterbar:control>
                     <DatePicker />
+                    <!-- <Input submit=""></Input> -->
                 </filterbar:control>
             </filterbar:FilterGroupItem>
 
@@ -89,11 +93,11 @@
     </filterbar:FilterBar>
 
     <Toolbar class="sapUiTinyMargin">
-        <Button
+        <!-- <Button
             icon="sap-icon://add"
             type="Ghost"
             press="onPressAddNewSachnummerToTableStep11"
-        />
+        /> -->
         <ToolbarSpacer />
         <Select change="onSelectChangeItemCardinalityMainPageTable">
             <c:Item key="20" text="20" />
@@ -139,14 +143,34 @@
                 <Column >
                     <Label text="{i18n>text.erstelldatum}"/>
                 </Column>
-
             </columns>
             <items>
                 <ColumnListItem id="cliMainPageTable"
                     type="Active">
                     <cells >
                         <Text text="{applicationModel>PW_NR}"></Text>
-                        <Text text="{applicationModel>STAT}"></Text>
+                        <!-- <Text text="{applicationModel>STAT}"></Text> -->
+                        <commons:MicroProcessFlow id="statusContainerMaster">
+                            <commons:content>
+                                <commons:MicroProcessFlowItem icon="sap-icon://edit"
+                                    state="{parts:[{path: 'applicationModel>STAT'},{path: 'applicationModel>GAEKO_Status'}], formatter: '.formatter.formatStateBullet1'}"
+                                    title="In Arbeit">
+                                </commons:MicroProcessFlowItem>
+                                <commons:MicroProcessFlowItem icon="sap-icon://inspection"
+                                    state="{parts:[{path: 'applicationModel>STAT'},{path: 'applicationModel>GAEKO_Status'}], formatter: '.formatter.formatStateBullet2'}"
+                                    title="Zur Genehmigung">
+                                </commons:MicroProcessFlowItem>
+                                <commons:MicroProcessFlowItem icon="sap-icon://lead"
+                                    visible="{applicationModel>/isGaekoAvailable}"
+                                    state="{parts:[{path: 'applicationModel>STAT'},{path: 'applicationModel>GAEKO_Status'}], formatter: '.formatter.formatStateBullet3'}"
+                                    title="Bezahlt">
+                                </commons:MicroProcessFlowItem>
+                                <commons:MicroProcessFlowItem icon="sap-icon://accept"
+                                    state="{parts:[{path: 'applicationModel>STAT'},{path: 'applicationModel>GAEKO_Status'}], formatter: '.formatter.formatStateBullet4'}"
+                                    title="Genehmigt">
+                                </commons:MicroProcessFlowItem>
+                            </commons:content>
+                        </commons:MicroProcessFlow>
                         <Text text="{applicationModel>BT_NR}"></Text>
                         <Text text="{applicationModel>VRWNG_AUSL}"></Text>
                         <Text text="{applicationModel>Derivate_ConstructionSet_Project}"></Text>

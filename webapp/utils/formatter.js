@@ -19,6 +19,67 @@ sap.ui.define([], function () {
             var year = oDate.getFullYear();
 
             return day + "/" + month + "/" + year;
-        }
+        },
+
+        formatStateBullet1: function(stat, gaekoStatus) {
+            if (gaekoStatus === "") {
+                if (stat === "IA") {
+                    return "Warning"
+                } else if (stat === "ZG" || stat === "GE" || stat === "PA") {
+                    return "Success"
+                } else {
+                    return "None"
+                }
+            } else {
+                if (stat === "IA") {
+                    return "Error"
+                } else if (stat === "ZG" || stat === "GE" || stat === "PA") {
+                    return "Success"
+                } else {
+                    return "None"
+                }
+            }
+        },
+        formatStateBullet2: function(stat, gaekoStatus) {
+            if (gaekoStatus === "") {
+                if (stat === "ZG") {
+                    return "Warning"
+                } else if (stat === "GE" || stat === "PA") {
+                    return "Success"
+                } else {
+                    return "None"
+                }
+            } else {
+                if (stat === "ZG") {
+                    return "Error"
+                } else if (stat === "GE" || stat === "PA") {
+                    return "Success"
+                } else {
+                    return "None"
+                }
+            }
+        },
+        formatStateBullet3: function(stat, gaekoStatus) {
+            if (gaekoStatus === "") {
+                if (stat === "PA") {
+                    return "Warning"
+                } else if (stat === "GE" || stat === "PA") {
+                    return "Information"
+                } else {
+                    return "None"
+                }
+            } else {
+                if (stat === "PA") {
+                    return "Error"
+                } else if (stat === "GE" || stat === "PA") {
+                    return "Information"
+                } else {
+                    return "None"
+                }
+            }
+        },
+        formatStateBullet4: function(stat, gaekoStatus) {
+            return (stat === "GE" && gaekoStatus === "") ? "Information" : "None"; 
+        },
     };
 });

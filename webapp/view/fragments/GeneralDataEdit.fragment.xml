@@ -1,0 +1,300 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+>
+    <form:SimpleForm editable="true"
+        id="formGeneralDataEdit"
+        columnsXL="3"
+        columnsL="3"
+        columnsM="3"
+        emptySpanXL="0"
+        layout="ResponsiveGridLayout"
+        visible="{applicationModel>/bRestartVisibilityGeneralDataEdit}"
+    >
+
+            <!-- General -->
+            <c:Title text="Allgemeine Daten" />
+            
+            <Label text="{i18n>lbl.verwendungszweck}" required="true"/>
+            <TextArea
+                liveChange="onLiveChangeTextAreaVerwendungszweckStep10"
+                id="taTitelGeneralData"
+                value="{applicationModel>/HeaderEdit/VRWNG_AUSL}"
+                valueLiveUpdate="true"
+                editable="{applicationModel>/bEnableSummaryFields}"
+                class="sapUiSmallMarginBottom">
+            </TextArea>
+
+            <Label text="{i18n>txt.standort_anlieferung}" required="true"/>
+            <Input value="{applicationModel>/HeaderEdit/PROD_KATE}"></Input>
+            
+            <Label text="{i18n>lbl.derivate_baukasten_project}" required="true"/>
+            <Select id="cboxDerivateGeneralData"
+                change="onPressChangeComboBoxDerivateSummary"
+                selectedKey="{applicationModel>/HeaderEdit/Derivate_ConstructionSet_Project}"
+                editable="{applicationModel>/bEnableSummaryFields}"
+                items="{applicationModel>/DerivateBaukastenValues}"
+            >
+                <c:Item 
+                key="{applicationModel>Project}"
+                    text="{applicationModel>Project}">
+                </c:Item>
+            </Select>
+            
+            <Label text="{i18n>lbl.build_phase}" required="true"/>
+            <Select id="cboxBuildPhaseGeneralData"
+                change="onPressChangeComboBoxConstructionSummary"
+                selectedKey="{applicationModel>/HeaderEdit/BAUPHASE}"
+                editable="{applicationModel>/bEnableSummaryFields}"
+                items="{applicationModel>/BBGVorserieValues}"
+            >
+                <c:Item key="{applicationModel>BBG}"
+                    text="{applicationModel>BBG}"></c:Item>
+            </Select>
+            
+            <Label text="{i18n>lbl5.wizard1.step12}" required="true"/>
+            <Input id="inputKostenstelleGeneralData"
+                valueLiveUpdate="true"
+                liveChange="onLiveChangeInputCostCenterStep10"
+                class="sapUiSmallMarginBottom"
+                maxLength="4"
+                value="{applicationModel>/HeaderEdit/KOSTL}"
+                placeholder="{i18n>placeholder.wizard1.step3}"
+                editable="{applicationModel>/bEnableSummaryFields}">
+            </Input>
+
+
+            <Label text="{i18n>lbl.at_art}"/>
+            <Select change="onChangeSelectComboBoxAtArtSet"
+                items="{applicationModel>/AtArtSet}"
+                editable="{applicationModel>/bEnableSummaryFields}"
+                selectedKey="{applicationModel>/HeaderEdit/AtArt}"
+                id="cboxAbsicherungGeneralData">
+                <c:Item 
+                    key="{applicationModel>Value}"
+                    text="{applicationModel>Description}">
+                </c:Item>
+            </Select>
+            <Label text="{i18n>lbl.verwendervermerk}"/>
+            <Input value="" id="inputDescriptionGeneralData"
+                editable="{applicationModel>/bEnableSummaryFields}"
+            />
+
+            <c:Title text="" />
+
+            <!-- Delivery & date -->
+            <Label text="{i18n>lbl8.wizard1.step12}" required="true"/>
+            <Select id="selectGeneralDataDateSelection"
+                change="onChangeComboBoxStep8"
+                selectedKey="{applicationModel>/HeaderEdit/Delivery_type}"
+                editable="{applicationModel>/bEnableSummaryFields}"
+                items="{selectAnlieferungModel>/SelectAnlieferungValues}">
+                <c:Item key="{selectAnlieferungModel>key}"
+                        text="{selectAnlieferungModel>text}" />
+            </Select>
+            <Label text="{i18n>lbl.b-termin}" required="true"/>
+            <DatePicker 
+                id="dpUpdateDateGeneralData"
+                value="{path: 'applicationModel>/HeaderEdit/CREATED_ON', formatter: '.formatter.formatDate'}" 
+                change="onChangeDatePickerGeneralData"
+                editable="{applicationModel>/bEnableSummaryFields}"
+            />
+
+            <c:Title text="" />
+
+            <!-- Ersteller -->
+            <c:Title text="{i18n>text.ersteller}" />
+
+            <Label text="{i18n>text.qx}"
+                required="true"/>
+            <Input value="{applicationModel>/HeaderEdit/Creator_QX}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+            <Label text="{i18n>text.lastname}"></Label>
+            <Input value="{applicationModel>/HeaderEdit/Creator_LastName}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+            <Label text="{i18n>text.firstname}"></Label>
+            <Input value="{applicationModel>/HeaderEdit/Creator_FirstName}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+            <Label text="{i18n>text.fachbereich}"></Label>
+            <Input value="{applicationModel>/HeaderEdit/Creator_Department}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+            <Label text="{i18n>text.email}"></Label>
+            <Input value="{applicationModel>/HeaderEdit/Creator_EmailAddress}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+
+
+            <!-- Verwender -->
+            <c:Title text="{i18n>text.verwender}"/>
+
+            <Label text="{i18n>text.qx}"
+                required="true" />
+            <Input value="{applicationModel>/HeaderEdit/User_QX}"
+                showValueHelp="true"
+                valueHelpOnly="true"
+                valueHelpRequest="onOpenSummaryVerwenderDialog"
+                required="true"
+                editable="{applicationModel>/bEnableSummaryFields}"
+                id="qxVerwenderGeneralData"></Input>
+            <Label text="{i18n>text.lastname}"></Label>
+            <Input value="{applicationModel>/HeaderEdit/User_LastName}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+            <Label text="{i18n>text.firstname}"></Label>
+            <Input value="{applicationModel>/HeaderEdit/User_FirstName}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+            <Label text="{i18n>text.fachbereich}"></Label>
+            <Input value="{applicationModel>/HeaderEdit/User_Department}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+            <Label text="{i18n>text.email}"></Label>
+            <Input value="{applicationModel>/HeaderEdit/User_EmailAddress}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+
+			<!-- Beteiligten -->
+
+            <c:Title text="{i18n>text.abgestimmt}"/>
+
+            <Label text="{i18n>text.qx}"/>
+            <Input value="{applicationModel>/HeaderEdit/Additional_recipient_QX}"
+                showValueHelp="true"
+                valueHelpOnly="true"
+                valueHelpRequest="onOpenSummaryBeteiligtenDialog"
+                editable="{applicationModel>/bEnableSummaryFields}"
+                id="qxBeteiligtenGeneralData"></Input>
+            <Label text="{i18n>text.lastname}"></Label>
+            <Input value="{applicationModel>/HeaderEdit/Additional_recipient_LastName}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+            <Label text="{i18n>text.firstname}"></Label>
+            <Input value="{applicationModel>/HeaderEdit/Additional_recipient_FirstName}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+            <Label text="{i18n>text.fachbereich}"></Label>
+            <Input value="{applicationModel>/HeaderEdit/Additional_recipient_Department}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+            <Label text="{i18n>text.email}"></Label>
+            <Input value="{applicationModel>/HeaderEdit/Additional_recipient_EmailAddress}"
+                editable="{applicationModel>/bNotEditableSummaryFields}"></Input>
+
+            <!-- Receiver Intern / Mitarbeiter-->
+            <c:Title text="{i18n>text1Form.wizard1.step9}"/>
+            <RadioButton id="rbInternDeliveryGeneralData"
+                select="handleInternDeliverySummary"
+                groupName="receiverGroupSummary"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                selected="{applicationModel>/bSelectedRadioButtonMitarbeiter}"
+            />
+            <Label text="{i18n>text.qx}"
+                required="{applicationModel>/bSelectedRadioButtonMitarbeiter}" />
+            <Input showValueHelp="true"
+                id="inputRbInternDeliveryGeneralData"
+                editable="{applicationModel>/bSelectedRadioButtonMitarbeiter}"
+                valueHelpRequest="onOpenSummaryMitarbeiterDialog"
+                valueHelpOnly="true"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                value="{applicationModel>/HeaderEdit/Internal_receiver_QX}" />
+            <Label text="{i18n>text.lastname}"/>
+            <Input editable="{applicationModel>/bSelectedRadioButtonMitarbeiter}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                value="{applicationModel>/HeaderEdit/Internal_receiver_LastName}" />
+            <Label text="{i18n>text.firstname}"/>
+            <Input editable="{applicationModel>/bSelectedRadioButtonMitarbeiter}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                value="{applicationModel>/HeaderEdit/Internal_receiver_FirstName}" />
+            <Label text="{i18n>text.fachbereich}"/>
+            <Input editable="{applicationModel>/bSelectedRadioButtonMitarbeiter}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                value="{applicationModel>/HeaderEdit/Internal_receiver_Department}" />
+            <Label text="{i18n>text.email}"/>
+            <Input editable="{applicationModel>/bSelectedRadioButtonMitarbeiter}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                value="{applicationModel>/HeaderEdit/Internal_receiver_EmailAddress}" />
+            <Label text="{i18n>text.phone}"
+                id="lblInternalPhoneGeneralData" />
+            <Input editable="{applicationModel>/bSelectedRadioButtonMitarbeiter}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                value="{applicationModel>/HeaderEdit/Internal_receiver_Phone}" />
+            <Label text="{i18n>text.bauort}"
+                id="lblInternalBauortGeneralData"/>
+            <Input editable="{applicationModel>/bSelectedRadioButtonMitarbeiter}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                showValueHelp="true"
+                id="inputBauortGeneralData"
+                value="{applicationModel>/HeaderEdit/Internal_receiver_ConstructionSite}"
+                valueHelpRequest="onOpenSummaryInternDeliveryDialog"
+                valueHelpOnly="true">
+            </Input>
+            <Label text="{i18n>text.standort}"
+                id="lblInternalStandortGeneralData"/>
+            <Input editable="{applicationModel>/bSelectedRadioButtonMitarbeiter}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                showValueHelp="true"
+                id="inputLocationPartGeneralData"
+                value="{applicationModel>/HeaderEdit/Internal_receiver_LocationPart}"
+                valueHelpRequest="onOpenSummaryInternDeliveryDialog"
+                valueHelpOnly="true">
+            </Input>
+            <Label text="{i18n>text.building}"
+                id="lblInternalBuildingGeneralData"/>
+            <Input editable="{applicationModel>/bSelectedRadioButtonMitarbeiter}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                value="{applicationModel>/HeaderEdit/Internal_receiver_Building}">
+            </Input>
+            <Label text="{i18n>text.room_number}"
+                id="lblInternalRoomGeneralData"/>
+            <Input editable="{applicationModel>/bSelectedRadioButtonMitarbeiter}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                value="{applicationModel>/HeaderEdit/Internal_receiver_RoomNumber}">
+            </Input>
+            <Label text="{i18n>text.debitorennummer}"/>
+            <Input id="inputDebitorenGeneralData"
+                editable="{applicationModel>/bSelectedRadioButtonMitarbeiter}"
+                enabled="false"
+                value="{applicationModel>/HeaderEdit/Internal_receiver_Sup_Cust_nr}">
+            </Input>
+
+            <!-- Receiver Extern -->
+            <c:Title text="{i18n>text2Form.wizard1.step9}"/>
+            <RadioButton id="rbExternDeliveryGeneralData"
+                select="handleExternDeliverySummary"
+                groupName="receiverGroupSummaryOption6"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                selected="{applicationModel>/bSelectedRadioButtonExterneAdresse}"
+                />
+            <Label text="{i18n>text.supplier}"
+                required="{applicationModel>/bSelectedRadioButtonExterneAdresse}"/>
+            <Input showValueHelp="true"
+                id="inputRbExternAdresseGeneralData"
+                valueHelpRequest="onOpenSummaryExterneAdresseDialog"
+                valueHelpOnly="true"
+                editable="{applicationModel>/bSelectedRadioButtonExterneAdresse}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                value="{applicationModel>/HeaderEdit/External_receiver_ID}" />
+            
+            <Label text="{i18n>text.company}"/>
+            <Input editable="{applicationModel>/bNotEditableSummaryFields}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                id="inputExternalDepartmentGeneralData"
+                value="{applicationModel>/HeaderEdit/External_receiver_Name}" />
+            
+            <Label text="{i18n>text.street}"/>
+            <Input editable="{applicationModel>/bNotEditableSummaryFields}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                id="inputExternalStreetGeneralData"
+                value="{applicationModel>/HeaderEdit/External_receiver_Address}" />
+            <Label text="{i18n>text.country_zip_place}"/>
+            <Input editable="{applicationModel>/bNotEditableSummaryFields}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                id="inputExternalLandGeneralData"
+                value="{applicationModel>/HeaderEdit/External_receiver_Place}" />
+            
+            <Label text="{i18n>text.contact}"/>
+            <Input editable="{applicationModel>/bSelectedRadioButtonExterneAdresse}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                id="inputExternalContactPersonGeneralData"
+                value="{applicationModel>/HeaderEdit/Step7ExterneAdresse/Contact_Person}" />
+            
+            <Label text="{i18n>text.phone}"/>
+            <Input editable="{applicationModel>/bSelectedRadioButtonExterneAdresse}"
+                enabled="{applicationModel>/bEnableSummaryFields}"
+                id="inputExternalPhoneGeneralData"
+                value="{applicationModel>/HeaderEdit/Step7ExterneAdresse/Phone}" />
+        </form:SimpleForm>
+</c:FragmentDefinition>

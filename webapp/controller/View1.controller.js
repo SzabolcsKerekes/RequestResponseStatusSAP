@@ -45,6 +45,8 @@ sap.ui.define([
                     var aPwListSet = oModel.getProperty("/HeaderSet");
                     // Setting up table
                     oModel.setProperty("/MainPageTableDataList", aPwListSet);
+                    oModel.setProperty("/Step7BenutzersucheList", aPwListSet);
+
                 });
             },
 
@@ -57,14 +59,93 @@ sap.ui.define([
                 // Implement your logic here
             },
 
-            // onPressOptionsMainPageTable: function () {
-            //     // Handle the options button press
-            //     // Implement your logic here
-            // },
-
             /* ======================================================================================================================================
-                Navigation to Details Page
+                Main Page Table Filterbar & Search Implementation
             ====================================================================================================================================== */
+            // // Clearing search fields
+            onPressClearSearchMainPageTable: function () {
+                var oFilterBar = this.byId("fbMainPageTable");
+                var aFilterItems = oFilterBar.getAllFilterItems();
+
+                aFilterItems.forEach(function (oFilterItem) {
+                    var oControl = oFilterItem.getControl();
+                    if (oControl) {
+                        oControl.setValue("");
+                    }
+                });
+
+                var oTable = this.byId("scMainPageTable").getContent()[0];
+                oTable.getBinding("items").filter([]);
+            },
+            
+            // // Setting search filters on list
+            // onPressSearchMainPageTable: function (oEvent) {
+            //     var oFilterBar = this.byId("fbMainPageTable");
+            //     var aFilters = [];
+            //     var aFilterItems = oFilterBar.getAllFilterItems();
+                
+            //     console.log("Filter Bar:", oFilterBar);
+            //     console.log("Filter Items:", aFilterItems);
+            
+            //     aFilterItems.forEach(function (oFilterItem) {
+            //         var oControl = oFilterItem.getControl();
+            //         if (oControl) {
+            //             var sKey = oFilterItem.getName();
+            //             var sValue;
+            
+            //             if (oControl.getValue) {
+            //                 sValue = oControl.getValue();
+            //             } 
+            //             // else if (oControl.getSelectedKey) {
+            //             //     sValue = oControl.getSelectedKey();
+            //             // } else if (oControl.getDateValue) {
+            //             //     var oDate = oControl.getDateValue();
+            //             //     sValue = oDate ? oDate.toISOString().split('T')[0] : null; // Adjust date format as needed
+            //             // }
+            
+            //             if (sValue) {
+            //                 console.log("Adding Filter:", sKey, sValue);
+            //                 aFilters.push(new Filter(sKey, FilterOperator.Contains, sValue.toLowerCase()));
+            //             }
+            //         }
+            //     });
+            
+            //     console.log("Filters Applied:", aFilters.length);
+            
+            //     var oTable = this.byId("scMainPageTable").getContent()[0];
+            //     var oBinding = oTable.getBinding("items");
+            
+            //     console.log("Binding before filter:", oBinding);
+
+            //     oBinding.filter(aFilters);
+            
+            //     console.log("Binding after filter:", oBinding.length);
+            // },
+            onPressSearchMainPageTable: function () {
+                var oFilterBar = this.byId("fbMainPageTable");
+                var aFilters = [];
+                var aFilterItems = oFilterBar.getAllFilterItems();
+
+                aFilterItems.forEach(function (oFilterItem) {
+                    var oControl = oFilterItem.getControl();
+                    if (oControl && oControl.getValue) {
+                        var sValue = oControl.getValue();
+                        if (sValue) {
+                            var sKey = oFilterItem.getName();
+                            aFilters.push(new Filter(sKey, FilterOperator.Contains, sValue.toLowerCase()));
+                        }
+                    }
+                });
+
+                // Applying filters to the table
+                var oTable = this.byId("scMainPageTable").getContent()[0];
+                var oBinding = oTable.getBinding("items");
+                oBinding.filter(aFilters);
+            },
+
+            // /* ======================================================================================================================================
+            //     Navigation to Details Page
+            // ====================================================================================================================================== */
             onPressSelectMainPageTableNavToPwDetails: function (oEvent) {
                 var oSelectedItem = oEvent.getParameter("listItem") || oEvent.getSource();
 
@@ -72,15 +153,6 @@ sap.ui.define([
                 var sPwNr = oContext.getProperty("PW_NR");
                 var sOidKop = oContext.getProperty("OID_KOP");
                 var sAnrKop = oContext.getProperty("ANR_KOP");
-
-                // var aPwListSet = this.getView().getModel("applicationModel").getProperty("/HeaderSet");
-
-                // Find the object with the matching PPNumber
-                // var oMatchingObject = aPwListSet.find(function (oItem) {
-                //     return oItem.PW_NR === sPwNr;
-                // });
-
-                // this.getView().getModel("applicationModel").setProperty("/selectedItemFromMainTable", oMatchingObject);
             
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("RoutePwDetails", {
@@ -89,5 +161,6 @@ sap.ui.define([
                     OID_KOP: sOidKop
                 });
             }
+
         });
     });
