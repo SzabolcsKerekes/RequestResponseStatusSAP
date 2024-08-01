@@ -77,22 +77,22 @@ sap.ui.define([
                 var oTable = this.byId("scMainPageTable").getContent()[0];
                 oTable.getBinding("items").filter([]);
             },
-            
+
             // // Setting search filters on list
             // onPressSearchMainPageTable: function (oEvent) {
             //     var oFilterBar = this.byId("fbMainPageTable");
             //     var aFilters = [];
             //     var aFilterItems = oFilterBar.getAllFilterItems();
-                
+
             //     console.log("Filter Bar:", oFilterBar);
             //     console.log("Filter Items:", aFilterItems);
-            
+
             //     aFilterItems.forEach(function (oFilterItem) {
             //         var oControl = oFilterItem.getControl();
             //         if (oControl) {
             //             var sKey = oFilterItem.getName();
             //             var sValue;
-            
+
             //             if (oControl.getValue) {
             //                 sValue = oControl.getValue();
             //             } 
@@ -102,25 +102,47 @@ sap.ui.define([
             //             //     var oDate = oControl.getDateValue();
             //             //     sValue = oDate ? oDate.toISOString().split('T')[0] : null; // Adjust date format as needed
             //             // }
-            
+
             //             if (sValue) {
             //                 console.log("Adding Filter:", sKey, sValue);
             //                 aFilters.push(new Filter(sKey, FilterOperator.Contains, sValue.toLowerCase()));
             //             }
             //         }
             //     });
-            
+
             //     console.log("Filters Applied:", aFilters.length);
-            
+
             //     var oTable = this.byId("scMainPageTable").getContent()[0];
             //     var oBinding = oTable.getBinding("items");
-            
+
             //     console.log("Binding before filter:", oBinding);
 
             //     oBinding.filter(aFilters);
-            
+
             //     console.log("Binding after filter:", oBinding.length);
             // },
+            // onPressSearchMainPageTable: function () {
+            //     var oFilterBar = this.byId("fbMainPageTable");
+            //     var aFilters = [];
+            //     var aFilterItems = oFilterBar.getAllFilterItems();
+
+            //     aFilterItems.forEach(function (oFilterItem) {
+            //         var oControl = oFilterItem.getControl();
+            //         if (oControl && oControl.getValue) {
+            //             var sValue = oControl.getValue();
+            //             if (sValue) {
+            //                 var sKey = oFilterItem.getName();
+            //                 aFilters.push(new Filter(sKey, FilterOperator.Contains, sValue.toLowerCase()));
+            //             }
+            //         }
+            //     });
+
+            //     // Applying filters to the table
+            //     var oTable = this.byId("scMainPageTable").getContent()[0];
+            //     var oBinding = oTable.getBinding("items");
+            //     oBinding.filter(aFilters);
+            // },
+
             onPressSearchMainPageTable: function () {
                 var oFilterBar = this.byId("fbMainPageTable");
                 var aFilters = [];
@@ -129,10 +151,35 @@ sap.ui.define([
                 aFilterItems.forEach(function (oFilterItem) {
                     var oControl = oFilterItem.getControl();
                     if (oControl && oControl.getValue) {
-                        var sValue = oControl.getValue();
+                        var sValue = oControl.getValue().toLowerCase();
                         if (sValue) {
                             var sKey = oFilterItem.getName();
-                            aFilters.push(new Filter(sKey, FilterOperator.Contains, sValue.toLowerCase()));
+                            switch (sKey) {
+                                case "PWNummer":
+                                    aFilters.push(new Filter("PW_NR", FilterOperator.Contains, sValue));
+                                    break;
+                                case "Status":
+                                    aFilters.push(new Filter("STAT", FilterOperator.Contains, sValue));
+                                    break;
+                                case "Planungsnummer":
+                                    aFilters.push(new Filter("BT_NR", FilterOperator.Contains, sValue));
+                                    break;
+                                case "Verwendungszweck":
+                                    aFilters.push(new Filter("VRWNG_AUSL", FilterOperator.Contains, sValue));
+                                    break;
+                                case "Projektnummer":
+                                    aFilters.push(new Filter("Derivate_ConstructionSet_Project", FilterOperator.Contains, sValue));
+                                    break;
+                                case "Ersteller":
+                                    aFilters.push(new Filter("Creator", FilterOperator.Contains, sValue));
+                                    break;
+                                case "Verwender":
+                                    aFilters.push(new Filter("User_LastName", FilterOperator.Contains, sValue));
+                                    break;
+                                case "Erstelldatum":
+                                    aFilters.push(new Filter("CREATED_ON", FilterOperator.Contains, sValue));
+                                    break;
+                            }
                         }
                     }
                 });
@@ -153,7 +200,7 @@ sap.ui.define([
                 var sPwNr = oContext.getProperty("PW_NR");
                 var sOidKop = oContext.getProperty("OID_KOP");
                 var sAnrKop = oContext.getProperty("ANR_KOP");
-            
+
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("RoutePwDetails", {
                     PW_NR: sPwNr,
